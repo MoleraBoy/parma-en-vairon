@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parma en Vairon</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        font-family: "Garamond", serif;
+        background-color: #f5f5dc;
+        color: #333;
+        margin: 20px;
+      }
+      h1 {
+        text-align: center;
+        font-size: 2.5em;
+        text-decoration: underline;
+      }
+      h2 {
+        color: #8b0000;
+        font-size: 1.8em;
+        margin-top: 20px;
+      }
+      p {
+        font-size: 1.1em;
+        line-height: 1.5;
+      }
+      .game-info {
+        font-size: 0.9em;
+        font-style: italic;
+        color: #555;
+      }
+      .menu-btn {
+        border-radius: 50%;
+        padding: 10px;
+        background-color: #8b0000;
+        color: white;
+        border: none;
+        cursor: pointer;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+      }
+      .filter-menu {
+        display: none;
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        z-index: 1000;
+        width: 250px;
+      }
+      .filter-menu label {
+        margin-right: 10px;
+      }
+      .suggestions {
+        position: absolute;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        z-index: 1000;
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+      .suggestion-item {
+        padding: 5px;
+        cursor: pointer;
+      }
+      .suggestion-item:hover {
+        background-color: #f0f0f0;
+      }
+      .favorite {
+        color: #8b0000;
+        cursor: pointer;
+        font-size: 1.2em;
+      }
+      .clear-btn {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 1.2em;
+      }
+    </style>
+    <script>
+      const magias = [
+        {
+          nome: "Faca de Gelo",
+          tipo: "Slot",
+          componentes: "S, M (uma gota de água ou um pedaço de gelo)",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            "Uma magia que utiliza uma lâmina fria que corta como o gelo, seu aroma fresco e cortante pairando no ar. Um terror cristalizado que explode em um espetáculo de fragmentos.",
+          alcance: "18 metros",
+          tempoConjuracao: "Ação",
+          duracao: "Instantânea",
+          dano: "1d10 perfurante + 2d6 gélido em área",
+          salvaguarda: "CD 13, Destreza",
+        },
+        {
+          nome: "Curar Ferimentos",
+          tipo: "Slot",
+          componentes: "V, S",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            "Uma magia que provoca uma carícia suave, como a brisa morna de um amanhecer. Uma luz suave emana de minhas mãos, curando o que foi danificado.",
+          alcance: "Toque",
+          tempoConjuracao: "Ação",
+          duracao: "Instantânea",
+          cura: "2d8 + modificador de Sabedoria (+4)",
+        },
+        {
+          nome: "Bom Fruto",
+          tipo: "Slot",
+          componentes: "V, S, M (um ramo de visco)",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            "Uma magia que cria frutos mágicos que brotam como flores sob a luz da lua. Cada mordida oferece um sabor doce, curando e alimentando.",
+          alcance: "Pessoal",
+          tempoConjuracao: "Ação",
+          duracao: "24 horas",
+          cura: "1 ponto de vida e alimento para um dia",
+        },
+        {
+          nome: "Proteção Contra o Bem e o Mal",
+          tipo: "Slot",
+          componentes: "V, S, M (pote de Água Benta, 25 PO, consumido)",
+          ritual: false,
+          concentracao: true,
+          descricao:
+            "Uma magia que cria uma aura protetora envolvendo o alvo, como um escudo contra forças malignas.",
+          alcance: "Toque",
+          tempoConjuracao: "Ação",
+          duracao: "Concentração, até 10 minutos",
+        },
+        {
+          nome: "Onda Trovejante",
+          tipo: "Slot",
+          componentes: "V, S",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            "Uma magia que provoca um rugido que ecoa como trovão, vibrando pelo chão sob meus pés. A energia palpável empurra tudo ao seu redor.",
+          alcance: "Pessoal",
+          tempoConjuracao: "Ação",
+          duracao: "Instantânea",
+          dano: "2d8 de dano trovejante; empurra criaturas a até 4,5 metros",
+          salvaguarda: "CD 13, Constituição",
+        },
+        {
+          nome: "Amizade Animal",
+          tipo: "Slot",
+          componentes: "V, S, M (um bocado de comida)",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            "Uma magia que usa um gesto suave que conecta corações. As feras se tornam aliadas, compartilhando suas histórias e sabedoria.",
+          alcance: "9 metros",
+          tempoConjuracao: "Ação",
+          duracao: "24 horas",
+        },
+        {
+          nome: "Falar com Animais",
+          tipo: "Slot",
+          componentes: "V, S",
+          ritual: true,
+          concentracao: false,
+          descricao:
+            "Um truque que estabelece uma conexão com o reino animal, onde as vozes se entrelaçam como folhas ao vento. Os segredos da floresta são revelados.",
+          alcance: "Pessoal",
+          tempoConjuracao: "Ação ou Ritual (10 minutos)",
+          duracao: "10 minutos",
+        },
+        {
+          nome: "Enfeitiçar Pessoa",
+          tipo: "Slot",
+          componentes: "V, S",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            "Uma magia que utiliza um toque suave e sutil, como a brisa que acaricia a pele. O olhar do alvo se transforma, cheio de admiração.",
+          alcance: "9 metros",
+          tempoConjuracao: "Ação",
+          duracao: "1 hora",
+          salvaguarda: "CD 13, Sabedoria",
+        },
+        {
+          nome: "Fogo das Fadas",
+          tipo: "Slot",
+          componentes: "V",
+          ritual: false,
+          concentracao: true,
+          descricao:
+            "Um truque que cria pequenas luzes dançantes, iluminando a escuridão como estrelas caindo. A magia flui, revelando o que estava oculto.",
+          alcance: "18 metros",
+          tempoConjuracao: "Ação",
+          duracao: "Concentração, até 1 minuto",
+        },
+        {
+          nome: "Badalar Funebre",
+          tipo: "Truque",
+          componentes: "V, S",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            "Um truque que provoca um som de badalar reverberante, como um eco de lamentos. A vida se esvai, deixando apenas a morte.",
+          alcance: "18 metros",
+          tempoConjuracao: "Ação",
+          duracao: "Instantânea",
+          dano: "1d8 de dano necrótico (1d12 se o alvo já estiver ferido)",
+          salvaguarda: "CD 13, Sabedoria",
+        },
+        {
+          nome: "Criar ou Destruir Água",
+          tipo: "Slot",
+          componentes: "V, S, M (uma mistura de água e areia)",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            "Uma magia que permite moldar a água com um gesto suave, criando ou destruindo grandes quantidades com facilidade.",
+          alcance: "9 metros",
+          tempoConjuracao: "Ação",
+          duracao: "Instantânea",
+        },
+        {
+          nome: "Passos Largos",
+          tipo: "Slot",
+          componentes: "V, S, M (uma pitada de poeira)",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            "Uma magia que aumenta a velocidade de movimento do alvo, como se a brisa o carregasse para frente.",
+          alcance: "Toque",
+          tempoConjuracao: "Ação",
+          duracao: "1 hora",
+        },
+        {
+          nome: "Salto",
+          tipo: "Slot",
+          componentes: "V, S, M (perna traseira de um gafanhoto)",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            "Uma magia que permite ao alvo saltar grandes distâncias, como se as forças da natureza o impulsionassem.",
+          alcance: "Toque",
+          tempoConjuracao: "Ação Bônus",
+          duracao: "1 minuto",
+        },
+        {
+          nome: "Bordão Místico",
+          tipo: "Slot",
+          componentes: "V, S, M (um ramo de visco)",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            "Uma magia que transforma o cajado em uma arma poderosa, canalizando a energia da floresta.",
+          alcance: "Pessoal",
+          tempoConjuracao: "Ação Bônus",
+          duracao: "1 minuto",
+        },
+        {
+          nome: "Raio de Bruxa",
+          tipo: "Truque",
+          componentes: "V, S, M (um galho atingido por um raio)",
+          ritual: false,
+          concentracao: true,
+          descricao:
+            "Uma magia que provoca um golpe elétrico que ressoa como o trovão, a eletricidade dança entre meus dedos antes de atingir o alvo.",
+          alcance: "18 metros",
+          tempoConjuracao: "Ação",
+          duracao: "Concentração, até 1 minuto",
+          dano: "2d12 no primeiro ataque; 1d12 em turnos subsequentes",
+        },
+        {
+          nome: "Detectar Magia",
+          tipo: "Ritual",
+          componentes: "V, S",
+          ritual: true,
+          concentracao: true,
+          descricao:
+            "Uma magia que revela a presença de magia, permitindo que Vairon veja auras mágicas ao seu redor.",
+          alcance: "Pessoal",
+          tempoConjuracao: "10 minutos (ritual) ou Ação",
+          duracao: "Concentração, até 10 minutos",
+        },
+        {
+          nome: "Detectar Veneno e Doença",
+          tipo: "Ritual",
+          componentes: "V, S, M (uma folha de teixo)",
+          ritual: true,
+          concentracao: true,
+          descricao:
+            "Uma magia que permite a Vairon detectar venenos e doenças, como um faro aguçado para perigos ocultos.",
+          alcance: "Pessoal",
+          tempoConjuracao: "10 minutos (ritual) ou Ação",
+          duracao: "Concentração, até 10 minutos",
+        },
+        {
+          nome: "Purificar Alimentos e Bebidas",
+          tipo: "Ritual",
+          componentes: "V, S",
+          ritual: true,
+          concentracao: false,
+          descricao:
+            "Uma magia que limpa a podridão, como a água cristalina de um riacho. O odor de veneno se dissipa, dando lugar à frescura.",
+          alcance: "3 metros",
+          tempoConjuracao: "10 minutos (ritual) ou Ação",
+          duracao: "Instantânea",
+        },
+        {
+          nome: "Arte Druídica",
+          tipo: "Truque",
+          componentes: "V, S",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            "Um truque que cria efeitos sensoriais inofensivos, como folhas caindo ou fadas dançantes, evocando a beleza da natureza.",
+          alcance: "9 metros",
+          tempoConjuracao: "Ação",
+          duracao: "Instantânea",
+        },
+        {
+          nome: "Rajada de Veneno",
+          tipo: "Truque",
+          componentes: "V, S",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            "Um truque que transforma a fumaça do cachimbo em uma névoa tóxica, causando dano venenoso aos que se aproximam.",
+          alcance: "9 metros",
+          tempoConjuracao: "Ação",
+          duracao: "Instantânea",
+          dano: "1d12 de dano venenoso",
+        },
+      ];
+
+      let favoritos = [];
+      let filtros = {
+        truques: false,
+        semSlot: false,
+        comSlot: false,
+        rituais: false,
+        concentracao: false,
+        materiais: false,
+        favoritos: false,
+      };
+
+      function toggleMenu() {
+        const menu = document.getElementById("filter-menu");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+      }
+
+      function toggleFavorito(nome) {
+        if (favoritos.includes(nome)) {
+          favoritos = favoritos.filter((m) => m !== nome);
+        } else {
+          favoritos.push(nome);
+        }
+        atualizarMagias();
+      }
+
+      function atualizarMagias() {
+        const magiasFiltradas = magias.filter((magia) => {
+          const filtroTruques = !filtros.truques || magia.tipo === "Truque";
+          const filtroSemSlot =
+            !filtros.semSlot ||
+            magia.tipo === "Ritual" ||
+            magia.tipo === "Truque";
+          const filtroComSlot = !filtros.comSlot || magia.tipo === "Slot";
+          const filtroRituais = !filtros.rituais || magia.ritual;
+          const filtroConcentracao =
+            !filtros.concentracao || magia.concentracao;
+          const filtroMateriais =
+            !filtros.materiais || magia.componentes.includes("M");
+          const filtroFavoritos =
+            !filtros.favoritos || favoritos.includes(magia.nome);
+
+          return (
+            filtroTruques &&
+            filtroSemSlot &&
+            filtroComSlot &&
+            filtroRituais &&
+            filtroConcentracao &&
+            filtroMateriais &&
+            filtroFavoritos
+          );
+        });
+
+        const container = document.getElementById("magias-container");
+        container.innerHTML = "";
+
+        magiasFiltradas.forEach((magia) => {
+          const magiaElement = document.createElement("div");
+          magiaElement.className = "col-md-6";
+          magiaElement.innerHTML = `
+                    <h2>${
+                      magia.nome
+                    } <span class="favorite" onclick="toggleFavorito('${
+            magia.nome
+          }')">${favoritos.includes(magia.nome) ? "☠️" : "☠"}</span></h2>
+                    <p><i>${magia.descricao}</i></p>
+                    <p class="game-info">
+                        Alcance: <i>${magia.alcance}</i>; 
+                        Tempo de Conjuração: <i>${magia.tempoConjuracao}</i>; 
+                        Duração: <i>${magia.duracao}</i>; 
+                        Componentes: <i>${magia.componentes}</i>; 
+                        ${magia.dano ? `Dano: <i>${magia.dano}</i>; ` : ""}
+                        ${magia.cura ? `Cura: <i>${magia.cura}</i>; ` : ""}
+                        ${
+                          magia.salvaguarda
+                            ? `Salvaguarda: <i>${magia.salvaguarda}</i>`
+                            : ""
+                        }
+                    </p>
+                `;
+          container.appendChild(magiaElement);
+        });
+      }
+
+      function aplicarFiltros() {
+        filtros.truques = document.getElementById("filtro-truques").checked;
+        filtros.semSlot = document.getElementById("filtro-sem-slot").checked;
+        filtros.comSlot = document.getElementById("filtro-com-slot").checked;
+        filtros.rituais = document.getElementById("filtro-rituais").checked;
+        filtros.concentracao = document.getElementById(
+          "filtro-concentracao"
+        ).checked;
+        filtros.materiais = document.getElementById("filtro-materiais").checked;
+        filtros.favoritos = document.getElementById("filtro-favoritos").checked;
+        atualizarMagias();
+      }
+
+      function mostrarSugestoes() {
+        const input = document.getElementById("pesquisa").value.toLowerCase();
+        const sugestoes = magias.filter((magia) =>
+          magia.nome.toLowerCase().includes(input)
+        );
+        const sugestoesContainer = document.getElementById("sugestoes");
+        sugestoesContainer.innerHTML = "";
+
+        sugestoes.forEach((magia) => {
+          const item = document.createElement("div");
+          item.className = "suggestion-item";
+          item.innerHTML = `
+                    <input type="checkbox" onchange="selecionarMagia('${magia.nome}')"> ${magia.nome}
+                `;
+          item.onclick = () => mostrarMagiaUnica(magia.nome);
+          sugestoesContainer.appendChild(item);
+        });
+
+        sugestoesContainer.style.display =
+          sugestoes.length > 0 ? "block" : "none";
+      }
+
+      function selecionarMagia(nome) {
+        const magiaElement = document.querySelector(
+          `h2:contains('${nome}')`
+        ).parentElement;
+        magiaElement.style.order = -1;
+      }
+
+      function mostrarMagiaUnica(nome) {
+        const todasMagias = document.querySelectorAll(".col-md-6");
+        todasMagias.forEach((magia) => {
+          magia.style.display = magia
+            .querySelector("h2")
+            .innerText.includes(nome)
+            ? "block"
+            : "none";
+        });
+        document.getElementById("sugestoes").style.display = "none";
+      }
+
+      function limparFiltros() {
+        document.getElementById("filtro-truques").checked = false;
+        document.getElementById("filtro-sem-slot").checked = false;
+        document.getElementById("filtro-com-slot").checked = false;
+        document.getElementById("filtro-rituais").checked = false;
+        document.getElementById("filtro-concentracao").checked = false;
+        document.getElementById("filtro-materiais").checked = false;
+        document.getElementById("filtro-favoritos").checked = false;
+        atualizarMagias();
+      }
+
+      document.addEventListener("click", (event) => {
+        const sugestoes = document.getElementById("sugestoes");
+        const pesquisa = document.getElementById("pesquisa");
+        if (event.target !== pesquisa && !sugestoes.contains(event.target)) {
+          sugestoes.style.display = "none";
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        atualizarMagias();
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Parma en Vairon</h1>
+
+    <div class="container">
+      <div class="row mb-3">
+        <div class="col-md-12 d-flex">
+          <input
+            type="text"
+            id="pesquisa"
+            class="form-control"
+            placeholder="Pesquisar Magias..."
+            oninput="mostrarSugestoes()"
+          />
+          <button class="clear-btn" onclick="limparFiltros()">🧹</button>
+        </div>
+        <div id="sugestoes" class="suggestions"></div>
+      </div>
+
+      <div class="row" id="magias-container">
+        <!-- As magias serão carregadas aqui dinamicamente -->
+      </div>
+    </div>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <div id="filter-menu" class="filter-menu">
+      <h5>Filtros</h5>
+      <div>
+        <label
+          ><input
+            type="checkbox"
+            id="filtro-truques"
+            onchange="aplicarFiltros()"
+          />
+          Magias que são truques</label
+        ><br />
+        <label
+          ><input
+            type="checkbox"
+            id="filtro-sem-slot"
+            onchange="aplicarFiltros()"
+          />
+          Magias que não usam Slot de Magia</label
+        ><br />
+        <label
+          ><input
+            type="checkbox"
+            id="filtro-com-slot"
+            onchange="aplicarFiltros()"
+          />
+          Magias que usam Slot de Magia</label
+        ><br />
+        <label
+          ><input
+            type="checkbox"
+            id="filtro-rituais"
+            onchange="aplicarFiltros()"
+          />
+          Magias Rituais</label
+        ><br />
+        <label
+          ><input
+            type="checkbox"
+            id="filtro-concentracao"
+            onchange="aplicarFiltros()"
+          />
+          Magias que exigem concentração</label
+        ><br />
+        <label
+          ><input
+            type="checkbox"
+            id="filtro-materiais"
+            onchange="aplicarFiltros()"
+          />
+          Magias que exigem materiais</label
+        ><br />
+        <label
+          ><input
+            type="checkbox"
+            id="filtro-favoritos"
+            onchange="aplicarFiltros()"
+          />
+          Magias Favoritas</label
+        >
+      </div>
+    </div>
+
+    <footer>
+      <p style="text-align: center">Na lû thind helluvin</p>
+    </footer>
+  </body>
+</html>
