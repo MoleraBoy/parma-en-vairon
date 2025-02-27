@@ -160,6 +160,75 @@
     </style>
     <script>
       const magias = [
+        // Truques
+        {
+          nome: "Bordão Místico",
+          tipo: "Truque",
+          componentes: "V, S, M (um ramo de visco)",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            'Frase em Sindarin: "Taur, natha maethor!" (Floresta, torne-se força!)<br><i>O cajado vibra em minhas mãos, como se a própria floresta sussurrasse segredos antigos. A energia flui através dele, e sinto o poder da natureza pulsando em cada golpe. Um aroma de framboesa e musgo úmido preenche o ar, como se a terra estivesse viva.</i>',
+          alcance: "Pessoal",
+          tempoConjuracao: "Ação Bônus",
+          duracao: "1 minuto",
+          dano: "1d8 de dano contundente + modificador de Sabedoria",
+          salvaguarda: "Nenhuma",
+        },
+        {
+          nome: "Chicote de Espinhos",
+          tipo: "Truque",
+          componentes: "V, S",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            'Frase em Sindarin: "Natha dôr, orchalad!" (Que cresça, chicote de dor!)<br><i>O caule se transforma em um chicote de espinhos afiados, e o cheiro de terra molhada e seiva fresca invade o ar. Cada golpe é acompanhado por um som de estalo, como se a própria floresta estivesse gritando de dor.</i>',
+          alcance: "9 metros",
+          tempoConjuracao: "Ação",
+          duracao: "Instantânea",
+          dano: "1d6 de dano cortante",
+        },
+        {
+          nome: "Arte Druídica",
+          tipo: "Truque",
+          componentes: "V, S",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            'Frase em Sindarin: "Natha lûm, mellyn!" (Torne-se luz, amigos!)<br><i>Folhas dançam ao meu redor, e pequenas luzes cintilantes flutuam como fadas. O cheiro de flores silvestres e terra úmida preenche o ar, e sinto a natureza se curvar ao meu comando.</i>',
+          alcance: "9 metros",
+          tempoConjuracao: "Ação",
+          duracao: "Instantânea",
+        },
+        {
+          nome: "Rajada de Veneno",
+          tipo: "Truque",
+          componentes: "V, S",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            'Frase em Sindarin: "Dúath, natha hûl!" (Sombra, torne-se veneno!)<br><i>A fumaça do meu cachimbo se transforma em uma névoa tóxica, com um cheiro acre e doce que queima as narinas. Sinto o gosto metálico do veneno na língua, e vejo os olhos dos inimigos se encherem de desespero.</i>',
+          alcance: "9 metros",
+          tempoConjuracao: "Ação",
+          duracao: "Instantânea",
+          dano: "1d12 de dano venenoso",
+        },
+        {
+          nome: "Badalar Funebre",
+          tipo: "Truque",
+          componentes: "V, S",
+          ritual: false,
+          concentracao: false,
+          descricao:
+            'Frase em Sindarin: "Naur, natha naeth!" (Fogo, torne-se morte!)<br><i>O som de um sino fúnebre ecoa no ar, e sinto um calafrio percorrer minha espinha. O cheiro de terra úmida e morte preenche o ambiente, e vejo a vida se esvair dos olhos do alvo.</i>',
+          alcance: "18 metros",
+          tempoConjuracao: "Ação",
+          duracao: "Instantânea",
+          dano: "1d8 de dano necrótico (1d12 se o alvo já estiver ferido)",
+          salvaguarda: "CD 13, Sabedoria",
+        },
+
+        // Magias
         {
           nome: "Faca de Gelo",
           tipo: "Slot",
@@ -167,7 +236,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            'Frase em Sindarin: "Ringail, hatha naur!" (Gelo, torne-se lâmina!)<br><i>Uma magia que utiliza uma lâmina fria que corta como o gelo, seu aroma fresco e cortante pairando no ar. Um terror cristalizado que explode em um espetáculo de fragmentos.</i>',
+            'Frase em Sindarin: "Ringail, hatha naur!" (Gelo, torne-se lâmina!)<br><i>A gota de água congela em minhas mãos, e sinto o frio cortante penetrar minha pele. O aroma fresco e cortante do gelo paira no ar, e vejo o terror nos olhos dos inimigos quando a lâmina explode em fragmentos.</i>',
           alcance: "18 metros",
           tempoConjuracao: "Ação",
           duracao: "Instantânea",
@@ -181,7 +250,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            'Frase em Sindarin: "Estel, natha naur!" (Esperança, torne-se cura!)<br><i>Uma magia que provoca uma carícia suave, como a brisa morna de um amanhecer. Uma luz suave emana de minhas mãos, curando o que foi danificado.</i>',
+            'Frase em Sindarin: "Estel, natha naur!" (Esperança, torne-se cura!)<br><i>Uma luz suave emana de minhas mãos, e sinto o calor da vida fluir através de meus dedos. O cheiro de ervas frescas e flores silvestres preenche o ar, e vejo as feridas se fecharem como por milagre.</i>',
           alcance: "Toque",
           tempoConjuracao: "Ação",
           duracao: "Instantânea",
@@ -194,7 +263,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            'Frase em Sindarin: "Yavanna, natha maethor!" (Yavanna, torne-os frutos!)<br><i>Uma magia que cria frutos mágicos que brotam como flores sob a luz da lua. Cada mordida oferece um sabor doce, curando e alimentando.</i>',
+            'Frase em Sindarin: "Yavanna, natha maethor!" (Yavanna, torne-os frutos!)<br><i>O ramo de visco floresce em minhas mãos, e o cheiro doce de frutas maduras preenche o ar. Cada mordida é uma explosão de sabor, e sinto a energia da natureza me revitalizando.</i>',
           alcance: "Pessoal",
           tempoConjuracao: "Ação",
           duracao: "24 horas",
@@ -207,7 +276,7 @@
           ritual: false,
           concentracao: true,
           descricao:
-            'Frase em Sindarin: "Dúath, hatha thang!" (Escuridão, torne-se proteção!)<br><i>Uma magia que cria uma aura protetora envolvendo o alvo, como um escudo contra forças malignas.</i>',
+            'Frase em Sindarin: "Dúath, hatha thang!" (Escuridão, torne-se proteção!)<br><i>Uma aura protetora envolve o alvo, e sinto a energia mágica pulsando ao meu redor. O cheiro de incenso e água benta preenche o ar, e vejo os inimigos hesitarem ao se aproximar.</i>',
           alcance: "Toque",
           tempoConjuracao: "Ação",
           duracao: "Concentração, até 10 minutos",
@@ -219,7 +288,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            'Frase em Sindarin: "Naur, hatha bâr!" (Fogo, torne-se força!)<br><i>Uma magia que provoca um rugido que ecoa como trovão, vibrando pelo chão sob meus pés. A energia palpável empurra tudo ao seu redor.</i>',
+            'Frase em Sindarin: "Naur, hatha bâr!" (Fogo, torne-se força!)<br><i>Uma onda de energia trovejante é liberada, e sinto o chão tremer sob meus pés. O cheiro de ozônio e terra queimada preenche o ar, e vejo os inimigos serem arremessados para longe.</i>',
           alcance: "Pessoal",
           tempoConjuracao: "Ação",
           duracao: "Instantânea",
@@ -233,19 +302,19 @@
           ritual: false,
           concentracao: false,
           descricao:
-            'Frase em Sindarin: "Mellon, natha lam!" (Amigo, torne-se voz!)<br><i>Uma magia que usa um gesto suave que conecta corações. As feras se tornam aliadas, compartilhando suas histórias e sabedoria.</i>',
+            'Frase em Sindarin: "Mellon, natha lam!" (Amigo, torne-se voz!)<br><i>Um gesto suave, e sinto a conexão com o reino animal se fortalecer. O cheiro de terra úmida e folhas secas preenche o ar, e vejo os animais se aproximarem, curiosos e amigáveis.</i>',
           alcance: "9 metros",
           tempoConjuracao: "Ação",
           duracao: "24 horas",
         },
         {
           nome: "Falar com Animais",
-          tipo: "Slot", // Alterado de "Truque" para "Slot"
+          tipo: "Slot",
           componentes: "V, S",
           ritual: true,
           concentracao: false,
           descricao:
-            'Frase em Sindarin: "Mellon, hatha lam!" (Amigo, torne-se voz!)<br><i>Uma magia que estabelece uma conexão com o reino animal, onde as vozas se entrelaçam como folhas ao vento. Os segredos da floresta são revelados.</i>',
+            'Frase em Sindarin: "Mellon, hatha lam!" (Amigo, torne-se voz!)<br><i>As vozes dos animais ecoam em minha mente, e sinto a sabedoria da floresta fluir através de mim. O cheiro de musgo e terra úmida preenche o ar, e vejo os segredos da natureza se revelarem.</i>',
           alcance: "Pessoal",
           tempoConjuracao: "Ação ou Ritual (10 minutos)",
           duracao: "10 minutos",
@@ -257,7 +326,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            'Frase em Sindarin: "Mellon, natha hûl!" (Amigo, torne-se encanto!)<br><i>Uma magia que utiliza um toque suave e sutil, como a brisa que acaricia a pele. O olhar do alvo se transforma, cheio de admiração.</i>',
+            'Frase em Sindarin: "Mellon, natha hûl!" (Amigo, torne-se encanto!)<br><i>Um gesto sutil, e sinto a mente do alvo se dobrar à minha vontade. O cheiro de flores silvestres e mel preenche o ar, e vejo os olhos do alvo se encherem de admiração.</i>',
           alcance: "9 metros",
           tempoConjuracao: "Ação",
           duracao: "1 hora",
@@ -270,24 +339,10 @@
           ritual: false,
           concentracao: true,
           descricao:
-            'Frase em Sindarin: "Calad, hatha lûm!" (Luz, torne-se dança!)<br><i>Uma magia que cria pequenas luzes dançantes, iluminando a escuridão como estrelas caindo. A magia flui, revelando o que estava oculto.</i>',
+            'Frase em Sindarin: "Calad, hatha lûm!" (Luz, torne-se dança!)<br><i>Pequenas luzes dançantes iluminam a área, e sinto a magia fluir através de meus dedos. O cheiro de flores silvestres e fumaça doce preenche o ar, e vejo os inimigos se contorcerem sob a luz reveladora.</i>',
           alcance: "18 metros",
           tempoConjuracao: "Ação",
           duracao: "Concentração, até 1 minuto",
-        },
-        {
-          nome: "Badalar Funebre",
-          tipo: "Truque",
-          componentes: "V, S",
-          ritual: false,
-          concentracao: false,
-          descricao:
-            'Frase em Sindarin: "Naur, natha naeth!" (Fogo, torne-se morte!)<br><i>Um truque que provoca um som de badalar reverberante, como um eco de lamentos. A vida se esvai, deixando apenas a morte.</i>',
-          alcance: "18 metros",
-          tempoConjuracao: "Ação",
-          duracao: "Instantânea",
-          dano: "1d8 de dano necrótico (1d12 se o alvo já estiver ferido)",
-          salvaguarda: "CD 13, Sabedoria",
         },
         {
           nome: "Criar ou Destruir Água",
@@ -296,7 +351,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            'Frase em Sindarin: "Nîn, natha celair!" (Água, torne-se pura!)<br><i>Uma magia que permite moldar a água com um gesto suave, criando ou destruindo grandes quantidades com facilidade.</i>',
+            'Frase em Sindarin: "Nîn, natha celair!" (Água, torne-se pura!)<br><i>A água flui através de minhas mãos, e sinto o poder da natureza se manifestar. O cheiro de água fresca e terra úmida preenche o ar, e vejo a água se formar ou desaparecer conforme minha vontade.</i>',
           alcance: "9 metros",
           tempoConjuracao: "Ação",
           duracao: "Instantânea",
@@ -308,7 +363,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            'Frase em Sindarin: "Lüg, hatha bâr!" (Velocidade, torne-se força!)<br><i>Uma magia que aumenta a velocidade de movimento do alvo, como se a brisa o carregasse para frente.</i>',
+            'Frase em Sindarin: "Lüg, hatha bâr!" (Velocidade, torne-se força!)<br><i>Um gesto suave, e sinto a energia da natureza impulsionar o alvo. O cheiro de terra úmida e vento fresco preenche o ar, e vejo o alvo se mover com agilidade surpreendente.</i>',
           alcance: "Toque",
           tempoConjuracao: "Ação",
           duracao: "1 hora",
@@ -320,33 +375,19 @@
           ritual: false,
           concentracao: false,
           descricao:
-            'Frase em Sindarin: "Tolo, natha naeth!" (Venha, torne-se salto!)<br><i>Uma magia que permite ao alvo saltar grandes distâncias, como se as forças da natureza o impulsionassem.</i>',
+            'Frase em Sindarin: "Tolo, natha naeth!" (Venha, torne-se salto!)<br><i>Um gesto rápido, e sinto a energia da natureza impulsionar o alvo. O cheiro de terra úmida e folhas secas preenche o ar, e vejo o alvo saltar com agilidade surpreendente.</i>',
           alcance: "Toque",
           tempoConjuracao: "Ação Bônus",
           duracao: "1 minuto",
         },
         {
-          nome: "Bordão Místico",
-          tipo: "Slot",
-          componentes: "V, S, M (um ramo de visco)",
-          ritual: false,
-          concentracao: false,
-          descricao:
-            'Frase em Sindarin: "Taur, natha maethor!" (Floresta, torne-se força!)<br><i>Uma magia que transforma o cajado em uma arma poderosa, canalizando a energia da floresta. O bordão emite uma aura mágica, permitindo que você ataque com ele como se fosse uma arma mágica. Cada golpe desfere dano adicional, e você pode usar sua Sabedoria para os ataques, em vez de Força ou Destreza.</i>',
-          alcance: "Pessoal",
-          tempoConjuracao: "Ação Bônus",
-          duracao: "1 minuto",
-          dano: "1d8 de dano contundente + modificador de Sabedoria",
-          salvaguarda: "Nenhuma",
-        },
-        {
           nome: "Raio de Bruxa",
-          tipo: "Slot", // Alterado de "Truque" para "Slot"
+          tipo: "Slot",
           componentes: "V, S, M (um galho atingido por um raio)",
           ritual: false,
           concentracao: true,
           descricao:
-            'Frase em Sindarin: "Naur, hatha lûg!" (Fogo, torne-se raio!)<br><i>Uma magia que provoca um golpe elétrico que ressoa como o trovão, a eletricidade dança entre meus dedos antes de atingir o alvo.</i>',
+            'Frase em Sindarin: "Naur, hatha lûg!" (Fogo, torne-se raio!)<br><i>O galho brilha com energia elétrica, e sinto a eletricidade dançar entre meus dedos. O cheiro de ozônio e madeira queimada preenche o ar, e vejo o raio atingir o alvo com força devastadora.</i>',
           alcance: "18 metros",
           tempoConjuracao: "Ação",
           duracao: "Concentração, até 1 minuto",
@@ -359,7 +400,7 @@
           ritual: true,
           concentracao: true,
           descricao:
-            'Frase em Sindarin: "Ithil, natha thîr!" (Lua, torne-se visão!)<br><i>Uma magia que revela a presença de magia, permitindo que Vairon veja auras mágicas ao seu redor.</i>',
+            'Frase em Sindarin: "Ithil, natha thîr!" (Lua, torne-se visão!)<br><i>Um gesto circular, e sinto a magia ao meu redor se revelar. O cheiro de incenso e flores silvestres preenche o ar, e vejo as auras mágicas brilhando como estrelas.</i>',
           alcance: "Pessoal",
           tempoConjuracao: "10 minutos (ritual) ou Ação",
           duracao: "Concentração, até 10 minutos",
@@ -371,7 +412,7 @@
           ritual: true,
           concentracao: true,
           descricao:
-            'Frase em Sindarin: "Dûath, natha thîr!" (Escuridão, torne-se visão!)<br><i>Uma magia que permite a Vairon detectar venenos e doenças, como um faro aguçado para perigos ocultos.</i>',
+            'Frase em Sindarin: "Dûath, natha thîr!" (Escuridão, torne-se visão!)<br><i>Um gesto de varredura, e sinto a presença de venenos e doenças ao meu redor. O cheiro de folhas de teixo e terra úmida preenche o ar, e vejo os perigos ocultos se revelarem.</i>',
           alcance: "Pessoal",
           tempoConjuracao: "10 minutos (ritual) ou Ação",
           duracao: "Concentração, até 10 minutos",
@@ -383,35 +424,47 @@
           ritual: true,
           concentracao: false,
           descricao:
-            'Frase em Sindarin: "Nîn, natha celair!" (Água, torne-se pura!)<br><i>Uma magia que limpa a podridão, como a água cristalina de um riacho. O odor de veneno se dissipa, dando lugar à frescura.</i>',
+            'Frase em Sindarin: "Nîn, natha celair!" (Água, torne-se pura!)<br><i>Um gesto de limpeza, e sinto a podridão se dissipar. O cheiro de água fresca e flores silvestres preenche o ar, e vejo os alimentos e bebidas se tornarem puros.</i>',
           alcance: "3 metros",
           tempoConjuracao: "10 minutos (ritual) ou Ação",
           duracao: "Instantânea",
         },
         {
-          nome: "Arte Druídica",
-          tipo: "Truque",
-          componentes: "V, S",
+          nome: "Emaranhar",
+          tipo: "Slot",
+          componentes: "V, S, M (um pedaço de teia de aranha)",
           ritual: false,
-          concentracao: false,
+          concentracao: true,
           descricao:
-            'Frase em Sindarin: "Natha lûm, mellyn!" (Torne-se luz, amigos!)<br><i>Um truque que cria efeitos sensoriais inofensivos, como folhas caindo ou fadas dançantes, evocando a beleza da natureza.</i>',
-          alcance: "9 metros",
+            'Frase em Sindarin: "Galadh, natha thang!" (Árvore, torne-se laço!)<br><i>Plantas agarradoras brotam do chão, e sinto a energia da natureza se manifestar. O cheiro de terra úmida e folhas secas preenche o ar, e vejo os inimigos se contorcerem sob os laços.</i>',
+          alcance: "18 metros",
           tempoConjuracao: "Ação",
-          duracao: "Instantânea",
+          duracao: "Concentração, até 1 minuto",
         },
         {
-          nome: "Rajada de Veneno",
-          tipo: "Truque",
-          componentes: "V, S",
+          nome: "Névoa Obscurecente",
+          tipo: "Slot",
+          componentes: "V, S, M (uma pitada de poeira)",
+          ritual: false,
+          concentracao: true,
+          descricao:
+            'Frase em Sindarin: "Fuin, hatha dùath!" (Escuridão, torne-se névoa!)<br><i>A fumaça do meu cachimbo se expande, e sinto a névoa densa envolver a área. O cheiro de fumaça doce e terra úmida preenche o ar, e vejo os inimigos se perderem na escuridão.</i>',
+          alcance: "18 metros",
+          tempoConjuracao: "Ação",
+          duracao: "Concentração, até 1 hora",
+        },
+        {
+          nome: "Palavra Curativa",
+          tipo: "Slot",
+          componentes: "V",
           ritual: false,
           concentracao: false,
           descricao:
-            'Frase em Sindarin: "Dúath, natha hûl!" (Sombra, torne-se veneno!)<br><i>Um truque que transforma a fumaça do cachimbo em uma névoa tóxica, causando dano venenoso aos que se aproximam.</i>',
-          alcance: "9 metros",
-          tempoConjuracao: "Ação",
+            'Frase em Sindarin: "Estel, hatha naur!" (Esperança, torne-se cura!)<br><i>Uma palavra suave, e sinto a energia da cura fluir através de mim. O cheiro de flores silvestres e mel preenche o ar, e vejo as feridas se fecharem como por milagre.</i>',
+          alcance: "18 metros",
+          tempoConjuracao: "Ação Bônus",
           duracao: "Instantânea",
-          dano: "1d12 de dano venenoso",
+          cura: "1d4 + modificador de Sabedoria",
         },
       ];
 
