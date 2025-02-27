@@ -24,9 +24,10 @@
         color: #e0e0e0;
       }
       h1 {
-        text-align: center;
+        text-align: center; /* Centraliza o título */
         font-size: 2.5em;
         text-decoration: underline;
+        margin: 0 auto; /* Garante centralização */
       }
       h2 {
         color: #8b0000;
@@ -166,7 +167,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            "Uma magia que utiliza uma lâmina fria que corta como o gelo, seu aroma fresco e cortante pairando no ar. Um terror cristalizado que explode em um espetáculo de fragmentos.",
+            'Frase em Sindarin: "Ringail, hatha naur!" (Gelo, torne-se lâmina!)<br><i>Uma magia que utiliza uma lâmina fria que corta como o gelo, seu aroma fresco e cortante pairando no ar. Um terror cristalizado que explode em um espetáculo de fragmentos.</i>',
           alcance: "18 metros",
           tempoConjuracao: "Ação",
           duracao: "Instantânea",
@@ -180,7 +181,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            "Uma magia que provoca uma carícia suave, como a brisa morna de um amanhecer. Uma luz suave emana de minhas mãos, curando o que foi danificado.",
+            'Frase em Sindarin: "Estel, natha naur!" (Esperança, torne-se cura!)<br><i>Uma magia que provoca uma carícia suave, como a brisa morna de um amanhecer. Uma luz suave emana de minhas mãos, curando o que foi danificado.</i>',
           alcance: "Toque",
           tempoConjuracao: "Ação",
           duracao: "Instantânea",
@@ -193,7 +194,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            "Uma magia que cria frutos mágicos que brotam como flores sob a luz da lua. Cada mordida oferece um sabor doce, curando e alimentando.",
+            'Frase em Sindarin: "Yavanna, natha maethor!" (Yavanna, torne-os frutos!)<br><i>Uma magia que cria frutos mágicos que brotam como flores sob a luz da lua. Cada mordida oferece um sabor doce, curando e alimentando.</i>',
           alcance: "Pessoal",
           tempoConjuracao: "Ação",
           duracao: "24 horas",
@@ -206,7 +207,7 @@
           ritual: false,
           concentracao: true,
           descricao:
-            "Uma magia que cria uma aura protetora envolvendo o alvo, como um escudo contra forças malignas.",
+            'Frase em Sindarin: "Dúath, hatha thang!" (Escuridão, torne-se proteção!)<br><i>Uma magia que cria uma aura protetora envolvendo o alvo, como um escudo contra forças malignas.</i>',
           alcance: "Toque",
           tempoConjuracao: "Ação",
           duracao: "Concentração, até 10 minutos",
@@ -218,7 +219,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            "Uma magia que provoca um rugido que ecoa como trovão, vibrando pelo chão sob meus pés. A energia palpável empurra tudo ao seu redor.",
+            'Frase em Sindarin: "Naur, hatha bâr!" (Fogo, torne-se força!)<br><i>Uma magia que provoca um rugido que ecoa como trovão, vibrando pelo chão sob meus pés. A energia palpável empurra tudo ao seu redor.</i>',
           alcance: "Pessoal",
           tempoConjuracao: "Ação",
           duracao: "Instantânea",
@@ -232,19 +233,19 @@
           ritual: false,
           concentracao: false,
           descricao:
-            "Uma magia que usa um gesto suave que conecta corações. As feras se tornam aliadas, compartilhando suas histórias e sabedoria.",
+            'Frase em Sindarin: "Mellon, natha lam!" (Amigo, torne-se voz!)<br><i>Uma magia que usa um gesto suave que conecta corações. As feras se tornam aliadas, compartilhando suas histórias e sabedoria.</i>',
           alcance: "9 metros",
           tempoConjuracao: "Ação",
           duracao: "24 horas",
         },
         {
           nome: "Falar com Animais",
-          tipo: "Slot",
+          tipo: "Slot", // Alterado de "Truque" para "Slot"
           componentes: "V, S",
           ritual: true,
           concentracao: false,
           descricao:
-            "Um truque que estabelece uma conexão com o reino animal, onde as vozes se entrelaçam como folhas ao vento. Os segredos da floresta são revelados.",
+            'Frase em Sindarin: "Mellon, hatha lam!" (Amigo, torne-se voz!)<br><i>Uma magia que estabelece uma conexão com o reino animal, onde as vozas se entrelaçam como folhas ao vento. Os segredos da floresta são revelados.</i>',
           alcance: "Pessoal",
           tempoConjuracao: "Ação ou Ritual (10 minutos)",
           duracao: "10 minutos",
@@ -256,7 +257,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            "Uma magia que utiliza um toque suave e sutil, como a brisa que acaricia a pele. O olhar do alvo se transforma, cheio de admiração.",
+            'Frase em Sindarin: "Mellon, natha hûl!" (Amigo, torne-se encanto!)<br><i>Uma magia que utiliza um toque suave e sutil, como a brisa que acaricia a pele. O olhar do alvo se transforma, cheio de admiração.</i>',
           alcance: "9 metros",
           tempoConjuracao: "Ação",
           duracao: "1 hora",
@@ -269,7 +270,7 @@
           ritual: false,
           concentracao: true,
           descricao:
-            "Um truque que cria pequenas luzes dançantes, iluminando a escuridão como estrelas caindo. A magia flui, revelando o que estava oculto.",
+            'Frase em Sindarin: "Calad, hatha lûm!" (Luz, torne-se dança!)<br><i>Uma magia que cria pequenas luzes dançantes, iluminando a escuridão como estrelas caindo. A magia flui, revelando o que estava oculto.</i>',
           alcance: "18 metros",
           tempoConjuracao: "Ação",
           duracao: "Concentração, até 1 minuto",
@@ -281,7 +282,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            "Um truque que provoca um som de badalar reverberante, como um eco de lamentos. A vida se esvai, deixando apenas a morte.",
+            'Frase em Sindarin: "Naur, natha naeth!" (Fogo, torne-se morte!)<br><i>Um truque que provoca um som de badalar reverberante, como um eco de lamentos. A vida se esvai, deixando apenas a morte.</i>',
           alcance: "18 metros",
           tempoConjuracao: "Ação",
           duracao: "Instantânea",
@@ -295,7 +296,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            "Uma magia que permite moldar a água com um gesto suave, criando ou destruindo grandes quantidades com facilidade.",
+            'Frase em Sindarin: "Nîn, natha celair!" (Água, torne-se pura!)<br><i>Uma magia que permite moldar a água com um gesto suave, criando ou destruindo grandes quantidades com facilidade.</i>',
           alcance: "9 metros",
           tempoConjuracao: "Ação",
           duracao: "Instantânea",
@@ -307,7 +308,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            "Uma magia que aumenta a velocidade de movimento do alvo, como se a brisa o carregasse para frente.",
+            'Frase em Sindarin: "Lüg, hatha bâr!" (Velocidade, torne-se força!)<br><i>Uma magia que aumenta a velocidade de movimento do alvo, como se a brisa o carregasse para frente.</i>',
           alcance: "Toque",
           tempoConjuracao: "Ação",
           duracao: "1 hora",
@@ -319,7 +320,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            "Uma magia que permite ao alvo saltar grandes distâncias, como se as forças da natureza o impulsionassem.",
+            'Frase em Sindarin: "Tolo, natha naeth!" (Venha, torne-se salto!)<br><i>Uma magia que permite ao alvo saltar grandes distâncias, como se as forças da natureza o impulsionassem.</i>',
           alcance: "Toque",
           tempoConjuracao: "Ação Bônus",
           duracao: "1 minuto",
@@ -331,19 +332,21 @@
           ritual: false,
           concentracao: false,
           descricao:
-            "Uma magia que transforma o cajado em uma arma poderosa, canalizando a energia da floresta.",
+            'Frase em Sindarin: "Taur, natha maethor!" (Floresta, torne-se força!)<br><i>Uma magia que transforma o cajado em uma arma poderosa, canalizando a energia da floresta. O bordão emite uma aura mágica, permitindo que você ataque com ele como se fosse uma arma mágica. Cada golpe desfere dano adicional, e você pode usar sua Sabedoria para os ataques, em vez de Força ou Destreza.</i>',
           alcance: "Pessoal",
           tempoConjuracao: "Ação Bônus",
           duracao: "1 minuto",
+          dano: "1d8 de dano contundente + modificador de Sabedoria",
+          salvaguarda: "Nenhuma",
         },
         {
           nome: "Raio de Bruxa",
-          tipo: "Truque",
+          tipo: "Slot", // Alterado de "Truque" para "Slot"
           componentes: "V, S, M (um galho atingido por um raio)",
           ritual: false,
           concentracao: true,
           descricao:
-            "Uma magia que provoca um golpe elétrico que ressoa como o trovão, a eletricidade dança entre meus dedos antes de atingir o alvo.",
+            'Frase em Sindarin: "Naur, hatha lûg!" (Fogo, torne-se raio!)<br><i>Uma magia que provoca um golpe elétrico que ressoa como o trovão, a eletricidade dança entre meus dedos antes de atingir o alvo.</i>',
           alcance: "18 metros",
           tempoConjuracao: "Ação",
           duracao: "Concentração, até 1 minuto",
@@ -356,7 +359,7 @@
           ritual: true,
           concentracao: true,
           descricao:
-            "Uma magia que revela a presença de magia, permitindo que Vairon veja auras mágicas ao seu redor.",
+            'Frase em Sindarin: "Ithil, natha thîr!" (Lua, torne-se visão!)<br><i>Uma magia que revela a presença de magia, permitindo que Vairon veja auras mágicas ao seu redor.</i>',
           alcance: "Pessoal",
           tempoConjuracao: "10 minutos (ritual) ou Ação",
           duracao: "Concentração, até 10 minutos",
@@ -368,7 +371,7 @@
           ritual: true,
           concentracao: true,
           descricao:
-            "Uma magia que permite a Vairon detectar venenos e doenças, como um faro aguçado para perigos ocultos.",
+            'Frase em Sindarin: "Dûath, natha thîr!" (Escuridão, torne-se visão!)<br><i>Uma magia que permite a Vairon detectar venenos e doenças, como um faro aguçado para perigos ocultos.</i>',
           alcance: "Pessoal",
           tempoConjuracao: "10 minutos (ritual) ou Ação",
           duracao: "Concentração, até 10 minutos",
@@ -380,7 +383,7 @@
           ritual: true,
           concentracao: false,
           descricao:
-            "Uma magia que limpa a podridão, como a água cristalina de um riacho. O odor de veneno se dissipa, dando lugar à frescura.",
+            'Frase em Sindarin: "Nîn, natha celair!" (Água, torne-se pura!)<br><i>Uma magia que limpa a podridão, como a água cristalina de um riacho. O odor de veneno se dissipa, dando lugar à frescura.</i>',
           alcance: "3 metros",
           tempoConjuracao: "10 minutos (ritual) ou Ação",
           duracao: "Instantânea",
@@ -392,7 +395,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            "Um truque que cria efeitos sensoriais inofensivos, como folhas caindo ou fadas dançantes, evocando a beleza da natureza.",
+            'Frase em Sindarin: "Natha lûm, mellyn!" (Torne-se luz, amigos!)<br><i>Um truque que cria efeitos sensoriais inofensivos, como folhas caindo ou fadas dançantes, evocando a beleza da natureza.</i>',
           alcance: "9 metros",
           tempoConjuracao: "Ação",
           duracao: "Instantânea",
@@ -404,7 +407,7 @@
           ritual: false,
           concentracao: false,
           descricao:
-            "Um truque que transforma a fumaça do cachimbo em uma névoa tóxica, causando dano venenoso aos que se aproximam.",
+            'Frase em Sindarin: "Dúath, natha hûl!" (Sombra, torne-se veneno!)<br><i>Um truque que transforma a fumaça do cachimbo em uma névoa tóxica, causando dano venenoso aos que se aproximam.</i>',
           alcance: "9 metros",
           tempoConjuracao: "Ação",
           duracao: "Instantânea",
@@ -471,12 +474,8 @@
           const magiaElement = document.createElement("div");
           magiaElement.className = "col-md-6";
           magiaElement.innerHTML = `
-                    <h2>${
-                      magia.nome
-                    } <span class="favorite" onclick="toggleFavorito('${
-            magia.nome
-          }')">${favoritos.includes(magia.nome) ? "☠️" : "☠"}</span></h2>
-                    <p><i>${magia.descricao}</i></p>
+                    <h2>${magia.nome} <span class="favorite" onclick="toggleFavorito('${magia.nome}')">${favoritos.includes(magia.nome) ? "☠️" : "☠"}</span></h2>
+                    <p>${magia.descricao}</p>
                     <p class="game-info">
                         Alcance: <i>${magia.alcance}</i>; 
                         Tempo de Conjuração: <i>${magia.tempoConjuracao}</i>; 
@@ -484,11 +483,7 @@
                         Componentes: <i>${magia.componentes}</i>; 
                         ${magia.dano ? `Dano: <i>${magia.dano}</i>; ` : ""}
                         ${magia.cura ? `Cura: <i>${magia.cura}</i>; ` : ""}
-                        ${
-                          magia.salvaguarda
-                            ? `Salvaguarda: <i>${magia.salvaguarda}</i>`
-                            : ""
-                        }
+                        ${magia.salvaguarda ? `Salvaguarda: <i>${magia.salvaguarda}</i>` : ""}
                     </p>
                 `;
           container.appendChild(magiaElement);
@@ -500,9 +495,7 @@
         filtros.semSlot = document.getElementById("filtro-sem-slot").checked;
         filtros.comSlot = document.getElementById("filtro-com-slot").checked;
         filtros.rituais = document.getElementById("filtro-rituais").checked;
-        filtros.concentracao = document.getElementById(
-          "filtro-concentracao"
-        ).checked;
+        filtros.concentracao = document.getElementById("filtro-concentracao").checked;
         filtros.materiais = document.getElementById("filtro-materiais").checked;
         filtros.favoritos = document.getElementById("filtro-favoritos").checked;
         atualizarMagias();
@@ -526,23 +519,18 @@
           sugestoesContainer.appendChild(item);
         });
 
-        sugestoesContainer.style.display =
-          sugestoes.length > 0 ? "block" : "none";
+        sugestoesContainer.style.display = sugestoes.length > 0 ? "block" : "none";
       }
 
       function selecionarMagia(nome) {
-        const magiaElement = document.querySelector(
-          `h2:contains('${nome}')`
-        ).parentElement;
+        const magiaElement = document.querySelector(`h2:contains('${nome}')`).parentElement;
         magiaElement.style.order = -1;
       }
 
       function mostrarMagiaUnica(nome) {
         const todasMagias = document.querySelectorAll(".col-md-6");
         todasMagias.forEach((magia) => {
-          magia.style.display = magia
-            .querySelector("h2")
-            .innerText.includes(nome)
+          magia.style.display = magia.querySelector("h2").innerText.includes(nome)
             ? "block"
             : "none";
         });
@@ -575,9 +563,7 @@
       }
 
       function detectSystemTheme() {
-        const prefersDarkScheme = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        );
+        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
         const savedTheme = localStorage.getItem("theme");
         if (
           savedTheme === "dark" ||
