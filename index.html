@@ -138,6 +138,12 @@
         color: #333;
       }
       @media (max-width: 768px) {
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden; /* Impede a rolagem horizontal */
+            box-sizing: border-box;
+            }
         h1 {
           font-size: 2em;
         }
