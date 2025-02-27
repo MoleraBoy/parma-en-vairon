@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Parma en Vairon</title>
+    <title>Grimoire de Vairon</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -14,6 +14,11 @@
         background-color: #f5f5dc;
         color: #333;
         margin: 20px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      body.dark-theme {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
       }
       h1 {
         text-align: center;
@@ -33,6 +38,9 @@
         font-size: 0.9em;
         font-style: italic;
         color: #555;
+      }
+      .dark-theme .game-info {
+        color: #a0a0a0;
       }
       .menu-btn {
         border-radius: 50%;
@@ -58,6 +66,11 @@
         z-index: 1000;
         width: 250px;
       }
+      .dark-theme .filter-menu {
+        background-color: #333;
+        border-color: #555;
+        color: #e0e0e0;
+      }
       .filter-menu label {
         margin-right: 10px;
       }
@@ -71,6 +84,11 @@
         max-height: 200px;
         overflow-y: auto;
       }
+      .dark-theme .suggestions {
+        background-color: #333;
+        border-color: #555;
+        color: #e0e0e0;
+      }
       .suggestion-item {
         padding: 5px;
         cursor: pointer;
@@ -78,16 +96,56 @@
       .suggestion-item:hover {
         background-color: #f0f0f0;
       }
+      .dark-theme .suggestion-item:hover {
+        background-color: #444;
+      }
       .favorite {
         color: #8b0000;
         cursor: pointer;
         font-size: 1.2em;
+      }
+      .dark-theme .favorite {
+        color: #ff4444;
       }
       .clear-btn {
         background-color: transparent;
         border: none;
         cursor: pointer;
         font-size: 1.2em;
+      }
+      .theme-toggle-btn {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background-color: #333;
+        color: #ffcc00;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .theme-toggle-btn.dark {
+        background-color: #ffcc00;
+        color: #333;
+      }
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2em;
+        }
+        h2 {
+          font-size: 1.5em;
+        }
+        .filter-menu {
+          width: 90%;
+          right: 5%;
+          bottom: 70px;
+        }
       }
     </style>
     <script>
@@ -493,6 +551,34 @@
         atualizarMagias();
       }
 
+      function toggleTheme() {
+        const body = document.body;
+        const themeToggleBtn = document.getElementById("theme-toggle-btn");
+        if (body.classList.contains("dark-theme")) {
+          body.classList.remove("dark-theme");
+          themeToggleBtn.classList.remove("dark");
+          localStorage.setItem("theme", "light");
+        } else {
+          body.classList.add("dark-theme");
+          themeToggleBtn.classList.add("dark");
+          localStorage.setItem("theme", "dark");
+        }
+      }
+
+      function detectSystemTheme() {
+        const prefersDarkScheme = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        );
+        const savedTheme = localStorage.getItem("theme");
+        if (
+          savedTheme === "dark" ||
+          (prefersDarkScheme.matches && savedTheme !== "light")
+        ) {
+          document.body.classList.add("dark-theme");
+          document.getElementById("theme-toggle-btn").classList.add("dark");
+        }
+      }
+
       document.addEventListener("click", (event) => {
         const sugestoes = document.getElementById("sugestoes");
         const pesquisa = document.getElementById("pesquisa");
@@ -502,12 +588,13 @@
       });
 
       document.addEventListener("DOMContentLoaded", () => {
+        detectSystemTheme();
         atualizarMagias();
       });
     </script>
   </head>
   <body>
-    <h1>Parma en Vairon</h1>
+    <h1>Grimoire de Vairon</h1>
 
     <div class="container">
       <div class="row mb-3">
@@ -592,8 +679,19 @@
       </div>
     </div>
 
+    <button
+      id="theme-toggle-btn"
+      class="theme-toggle-btn"
+      onclick="toggleTheme()"
+    >
+      💡
+    </button>
+
     <footer>
-      <p style="text-align: center">Na lû thind helluvin</p>
+      <p style="text-align: center">
+        Nota: Estas magias são reflexos da mente de Vairon, cada uma uma
+        expressão de sua obsessão por vida, morte e a arte do sofrimento.
+      </p>
     </footer>
   </body>
 </html>
